@@ -13,7 +13,6 @@ namespace Alexanderpas\Common\HTTP\Tests;
 use Alexanderpas\Common\HTTP\StatusCode;
 
 use Alexanderpas\Common\HTTP\StatusCodeClass;
-use ECSPrefix20211002\Symfony\Contracts\HttpClient\Test\HttpClientTestCase;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
@@ -158,6 +157,49 @@ class StatusCodeClassNamedTest extends TestCase
         Assert::assertThat($codeClass, Assert::isNull());
         $this->expectException(ValueError::class);
         StatusCodeClass::fromName(name: $invalidName);
+    }
+
+    /**
+     * @dataProvider IntegerProvider
+     */
+    public function testFromInteger(int $integer, StatusCodeClass $expectedClass): void
+    {
+        $codeClass = StatusCodeClass::fromInteger(integer: $integer);
+        Assert::assertThat($codeClass, Assert::identicalTo($expectedClass));
+    }
+
+    /**
+     * @dataProvider IntegerProvider
+     */
+    public function testTryFromInteger(int $integer, StatusCodeClass $expectedClass): void
+    {
+        $codeClass = StatusCodeClass::tryFromInteger(integer: $integer);
+        Assert::assertThat($codeClass, Assert::identicalTo($expectedClass));
+    }
+
+    public static function IntegerProvider(): array
+    {
+        return [
+            'Unknown code 99 - server error' => [99, StatusCodeClass::ServerError],
+            'Unknown code 199 - informational' => [199, StatusCodeClass::Informational],
+            'Known code 200 - successful' => [200, StatusCodeClass::Successful],
+            'Unknown Code 255 - successful' => [255, StatusCodeClass::Successful],
+            'Known Code 300 - redirection' => [300, StatusCodeClass::Redirection],
+            'Unknown Code 355 - redirection' => [355, StatusCodeClass::Redirection],
+            'Known Code 400 - client error' => [400, StatusCodeClass::ClientError],
+            'Unknown Code 455 - client error' => [455, StatusCodeClass::ClientError],
+            'Known Code 500 - server error' => [500, StatusCodeClass::ServerError],
+            'Unknown Code 555 - server error' => [555, StatusCodeClass::ServerError],
+            'Unknown Code 600 - server error' => [600, StatusCodeClass::ServerError],
+            'Unknown Code 700 - server error' => [700, StatusCodeClass::ServerError],
+            'Unknown Code 9999 - server error' => [9999, StatusCodeClass::ServerError],
+        ];
+    }
+
+    public function testNullTryFromInteger(): void
+    {
+        $codeClass = StatusCodeClass::tryFromInteger(integer: null);
+        Assert::assertThat($codeClass, Assert::isNull());
     }
 
     public function testFromStatusCode(): void

@@ -165,8 +165,9 @@ enum StatusCode: int
     {
         $value = $this->value;
 
+        /** @psalm-suppress TypeDoesNotContainType */
         return match (true) {
-            $value >= 500 => StatusCodeClass::ServerError,
+            $value >= 500 || $value < 100 => StatusCodeClass::ServerError,
             $value >= 400 => StatusCodeClass::ClientError,
             $value >= 300 => StatusCodeClass::Redirection,
             $value >= 200 => StatusCodeClass::Successful,

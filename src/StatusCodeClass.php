@@ -13,9 +13,9 @@ namespace Alexanderpas\Common\HTTP;
 use ValueError;
 
 /**
- * Classes of response status codes as defined in RFC7231
+ * Classes of response status codes as defined in RFC9110
  *
- * @see https://datatracker.ietf.org/doc/html/rfc7231#section-6
+ * @see https://www.rfc-editor.org/rfc/rfc9110.html#section-15
  */
 enum StatusCodeClass
 {
@@ -45,14 +45,13 @@ enum StatusCodeClass
 
     public static function fromInteger(int $integer): StatusCodeClass
     {
-        $codeClass = self::tryFromInteger($integer);
-
-        if (is_null($codeClass)) {
-            $enumName = self::class;
-            throw new ValueError("$integer is not a valid value for enum \"$enumName\"");
-        }
-
-        return $codeClass;
+        return match (true) {
+            $integer >= 500 || $integer < 100 => StatusCodeClass::ServerError,
+            $integer >= 400 => StatusCodeClass::ClientError,
+            $integer >= 300 => StatusCodeClass::Redirection,
+            $integer >= 200 => StatusCodeClass::Successful,
+            $integer >= 100 => StatusCodeClass::Informational,
+        };
     }
 
     public static function fromStatusCode(StatusCode $statusCode): StatusCodeClass
@@ -80,12 +79,16 @@ enum StatusCodeClass
 
     public static function tryFromInteger(?int $integer): ?StatusCodeClass
     {
-        $statusCode = StatusCode::tryFromInteger($integer);
-
-        if (is_null($statusCode)) {
+        if (is_null($integer)) {
             return null;
         }
 
-        return self::fromStatusCode($statusCode);
+        $statusCode = StatusCode::tryFromInteger($integer);
+
+        if (!is_null($statusCode)) {
+            return self::fromStatusCode($statusCode);
+        }
+
+        return self::fromInteger($integer);
     }
 }
