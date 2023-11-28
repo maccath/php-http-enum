@@ -13,6 +13,7 @@ namespace Alexanderpas\Common\HTTP\Tests;
 use Alexanderpas\Common\HTTP\ReasonPhrase;
 use Alexanderpas\Common\HTTP\StatusCode;
 
+use Alexanderpas\Common\HTTP\StatusCodeClass;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
@@ -156,5 +157,22 @@ class StatusCodePositionalTest extends TestCase
         Assert::assertThat($statusCode, Assert::isNull());
         $this->expectException(ValueError::class);
         StatusCode::fromInteger($int306);
+    }
+
+    public function testGetStatusCodeClass(): void
+    {
+        foreach ($this->cases as $case) {
+            $statusCodeClass = $case->getStatusCodeClass();
+
+            $expectedClass = match (true) {
+                $case->value >= 500 => StatusCodeClass::ServerError,
+                $case->value >= 400 => StatusCodeClass::ClientError,
+                $case->value >= 300 => StatusCodeClass::Redirection,
+                $case->value >= 200 => StatusCodeClass::Successful,
+                $case->value >= 100 => StatusCodeClass::Informational,
+            };
+
+            Assert::assertThat($statusCodeClass, Assert::identicalTo($expectedClass));
+        }
     }
 }

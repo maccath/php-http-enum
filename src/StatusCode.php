@@ -160,4 +160,17 @@ enum StatusCode: int
         $statusCode = self::tryFrom($integer);
         return $statusCode;
     }
+
+    public function getStatusCodeClass(): StatusCodeClass
+    {
+        $value = $this->value;
+
+        return match (true) {
+            $value >= 500 => StatusCodeClass::ServerError,
+            $value >= 400 => StatusCodeClass::ClientError,
+            $value >= 300 => StatusCodeClass::Redirection,
+            $value >= 200 => StatusCodeClass::Successful,
+            $value >= 100 => StatusCodeClass::Informational,
+        };
+    }
 }
