@@ -128,9 +128,6 @@ enum StatusCode: int
 
     public static function fromReasonPhrase(ReasonPhrase $reasonPhrase): StatusCode
     {
-        /**
-         * @var string $reasonPhrase->name
-         */
         return self::fromName($reasonPhrase->name);
     }
 

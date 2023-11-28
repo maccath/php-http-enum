@@ -37,9 +37,6 @@ class ReasonPhraseNamedTest extends TestCase
     public function testTryFromNames(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var string $case->name
-             */
             $name = $case->name;
             $reasonPhrase = ReasonPhrase::tryFromName(name: $name);
             Assert::assertThat($reasonPhrase, Assert::identicalTo($case));
@@ -49,9 +46,6 @@ class ReasonPhraseNamedTest extends TestCase
     public function testFromNames(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var string $case->name
-             */
             $name = $case->name;
             $reasonPhrase = ReasonPhrase::fromName(name: $name);
             Assert::assertThat($reasonPhrase, Assert::identicalTo($case));
@@ -62,9 +56,6 @@ class ReasonPhraseNamedTest extends TestCase
     {
         foreach ($this->cases as $case) {
             $statusCode = StatusCode::fromReasonPhrase($case);
-            /**
-             * @var int $statusCode->value
-             */
             $integer = $statusCode->value;
             $reasonPhrase = ReasonPhrase::tryFromInteger(integer: $integer);
             Assert::assertThat($reasonPhrase, Assert::identicalTo($case));
@@ -75,9 +66,6 @@ class ReasonPhraseNamedTest extends TestCase
     {
         foreach ($this->cases as $case) {
             $statusCode = StatusCode::fromReasonPhrase($case);
-            /**
-             * @var int $statusCode->value
-             */
             $integer = $statusCode->value;
             $reasonPhrase = ReasonPhrase::fromInteger(integer: $integer);
             Assert::assertThat($reasonPhrase, Assert::identicalTo($case));
@@ -87,9 +75,6 @@ class ReasonPhraseNamedTest extends TestCase
     public function testStatusCodeConversion(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var string $case->name
-             */
             $name = $case->name;
             $statusCode = StatusCode::fromName(name: $name);
             $reasonPhrase = ReasonPhrase::fromStatusCode(statusCode: $statusCode);

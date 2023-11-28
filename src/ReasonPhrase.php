@@ -128,9 +128,6 @@ enum ReasonPhrase: string
 
     public static function fromStatusCode(StatusCode $statusCode): ReasonPhrase
     {
-        /**
-         * @var string $statusCode->name
-         */
         return self::fromName($statusCode->name);
     }
 
