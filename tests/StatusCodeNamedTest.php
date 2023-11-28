@@ -13,6 +13,7 @@ namespace Alexanderpas\Common\HTTP\Tests;
 use Alexanderpas\Common\HTTP\ReasonPhrase;
 use Alexanderpas\Common\HTTP\StatusCode;
 
+use Alexanderpas\Common\HTTP\StatusCodeClass;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
