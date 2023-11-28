@@ -2,6 +2,7 @@
     "name": "alexanderpas/http-enum",
     "type": "library",
     "license": "BSL-1.0",
+    "description": "Composer package providing HTTP Methods, Status Codes and Reason Phrases for PHP",
     "authors": [
         {
             "name": "Alexander Pas",
