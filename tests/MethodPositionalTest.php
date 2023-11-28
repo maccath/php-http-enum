@@ -32,7 +32,7 @@ class MethodPositionalTest extends TestCase
         $this->cases = Method::cases();
     }
 
-    public function testCaconicalNameCapitalization(): void
+    public function testCanonicalNameCapitalization(): void
     {
         foreach ($this->cases as $case) {
             $name = $case->name;
