@@ -107,7 +107,7 @@ enum StatusCode: int
         $statusCode = self::tryFromName($name);
 
         if (is_null($statusCode)) {
-            $enumName = static::class;
+            $enumName = self::class;
             throw new ValueError("$name is not a valid name for enum \"$enumName\"");
         }
 
@@ -119,7 +119,7 @@ enum StatusCode: int
         $statusCode = self::tryFromInteger($integer);
 
         if (is_null($statusCode)) {
-            $enumName = static::class;
+            $enumName = self::class;
             throw new ValueError("$integer is not a valid value for enum \"$enumName\"");
         }
 
