@@ -50,7 +50,7 @@ enum Method: string
 
         if (defined("self::$name")) {
             /**
-             * @var Method
+             * @var Method $enumCase
              */
             $enumCase = constant("self::$name");
             return $enumCase;

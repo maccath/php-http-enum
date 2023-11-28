@@ -135,7 +135,7 @@ enum ReasonPhrase: string
     {
         if (defined("self::$name")) {
             /**
-             * @var ReasonPhrase
+             * @var ReasonPhrase $enumCase
              */
             $enumCase = constant("self::$name");
             return $enumCase;

@@ -135,7 +135,7 @@ enum StatusCode: int
     {
         if (defined("self::$name")) {
             /**
-             * @var StatusCode
+             * @var StatusCode $enumCase
              */
             $enumCase = constant("self::$name");
             return $enumCase;
@@ -151,7 +151,7 @@ enum StatusCode: int
         }
 
         /**
-         * @var ?StatusCode
+         * @var ?StatusCode $statusCode
          * @psalm-suppress UndefinedMethod
          */
         $statusCode = self::tryFrom($integer);
