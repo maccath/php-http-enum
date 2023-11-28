@@ -107,7 +107,7 @@ enum StatusCode: int
         $statusCode = self::tryFromName($name);
 
         if (is_null($statusCode)) {
-            $enumName = static::class;
+            $enumName = self::class;
             throw new ValueError("$name is not a valid name for enum \"$enumName\"");
         }
 
@@ -119,7 +119,7 @@ enum StatusCode: int
         $statusCode = self::tryFromInteger($integer);
 
         if (is_null($statusCode)) {
-            $enumName = static::class;
+            $enumName = self::class;
             throw new ValueError("$integer is not a valid value for enum \"$enumName\"");
         }
 
@@ -128,9 +128,6 @@ enum StatusCode: int
 
     public static function fromReasonPhrase(ReasonPhrase $reasonPhrase): StatusCode
     {
-        /**
-         * @var string $reasonPhrase->name
-         */
         return self::fromName($reasonPhrase->name);
     }
 
@@ -138,7 +135,7 @@ enum StatusCode: int
     {
         if (defined("self::$name")) {
             /**
-             * @var StatusCode
+             * @var StatusCode $enumCase
              */
             $enumCase = constant("self::$name");
             return $enumCase;
@@ -154,7 +151,7 @@ enum StatusCode: int
         }
 
         /**
-         * @var ?StatusCode
+         * @var ?StatusCode $statusCode
          * @psalm-suppress UndefinedMethod
          */
         $statusCode = self::tryFrom($integer);

@@ -32,7 +32,7 @@ enum Method: string
         $method = self::tryFromName($name);
 
         if (is_null($method)) {
-            $enumName = static::class;
+            $enumName = self::class;
             throw new ValueError("$name is not a valid name for enum \"$enumName\"");
         }
 
@@ -50,7 +50,7 @@ enum Method: string
 
         if (defined("self::$name")) {
             /**
-             * @var Method
+             * @var Method $enumCase
              */
             $enumCase = constant("self::$name");
             return $enumCase;

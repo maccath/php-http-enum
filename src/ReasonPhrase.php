@@ -107,7 +107,7 @@ enum ReasonPhrase: string
         $reasonPhrase = self::tryFromName($name);
 
         if (is_null($reasonPhrase)) {
-            $enumName = static::class;
+            $enumName = self::class;
             throw new ValueError("$name is not a valid name for enum \"$enumName\"");
         }
 
@@ -119,7 +119,7 @@ enum ReasonPhrase: string
         $reasonPhrase = self::tryFromInteger($integer);
 
         if (is_null($reasonPhrase)) {
-            $enumName = static::class;
+            $enumName = self::class;
             throw new ValueError("$integer is not a valid value for enum \"$enumName\"");
         }
 
@@ -128,9 +128,6 @@ enum ReasonPhrase: string
 
     public static function fromStatusCode(StatusCode $statusCode): ReasonPhrase
     {
-        /**
-         * @var string $statusCode->name
-         */
         return self::fromName($statusCode->name);
     }
 
@@ -138,7 +135,7 @@ enum ReasonPhrase: string
     {
         if (defined("self::$name")) {
             /**
-             * @var ReasonPhrase
+             * @var ReasonPhrase $enumCase
              */
             $enumCase = constant("self::$name");
             return $enumCase;

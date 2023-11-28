@@ -25,19 +25,16 @@ class MethodNamedTest extends TestCase
     /**
      * @var Method[]
      */
-    private array $cases;
+    private array $cases = [];
 
     public function setUp(): void
     {
         $this->cases = Method::cases();
     }
 
-    public function testCaconicalNameCapitalization(): void
+    public function testCanonicalNameCapitalization(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var string $case->name
-             */
             $name = $case->name;
             $canonicalName = strtoupper($case->name);
             Assert::assertThat($name, Assert::identicalTo($canonicalName));
@@ -47,9 +44,6 @@ class MethodNamedTest extends TestCase
     public function testFromNamesUppercase(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var string $case->name
-             */
             $name = strtoupper($case->name);
             $method = Method::fromName(name: $name);
             Assert::assertThat($method, Assert::identicalTo($case));
@@ -59,9 +53,6 @@ class MethodNamedTest extends TestCase
     public function testFromNamesLowercase(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var string $case->name
-             */
             $name = strtolower($case->name);
             $method = Method::fromName(name: $name);
             Assert::assertThat($method, Assert::identicalTo($case));
@@ -71,9 +62,6 @@ class MethodNamedTest extends TestCase
     public function testFromNamesTitlecase(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var string $case->name
-             */
             $name = ucfirst(strtolower($case->name));
             $method = Method::fromName(name: $name);
             Assert::assertThat($method, Assert::identicalTo($case));
@@ -83,9 +71,6 @@ class MethodNamedTest extends TestCase
     public function testFromNamesInvertedTitlecase(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var string $case->name
-             */
             $name = lcfirst(strtoupper($case->name));
             $method = Method::fromName(name: $name);
             Assert::assertThat($method, Assert::identicalTo($case));
@@ -95,9 +80,6 @@ class MethodNamedTest extends TestCase
     public function testTryFromNamesUppercase(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var string $case->name
-             */
             $name = strtoupper($case->name);
             $method = Method::tryFromName(name: $name);
             Assert::assertThat($method, Assert::identicalTo($case));
@@ -107,9 +89,6 @@ class MethodNamedTest extends TestCase
     public function testTryFromNamesLowercase(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var string $case->name
-             */
             $name = strtolower($case->name);
             $method = Method::tryFromName(name: $name);
             Assert::assertThat($method, Assert::identicalTo($case));
@@ -119,9 +98,6 @@ class MethodNamedTest extends TestCase
     public function testTryFromNamesTitlecase(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var string $case->name
-             */
             $name = ucfirst(strtolower($case->name));
             $method = Method::tryFromName(name: $name);
             Assert::assertThat($method, Assert::identicalTo($case));
@@ -131,9 +107,6 @@ class MethodNamedTest extends TestCase
     public function testTryFromNamesInvertedTitlecase(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var string $case->name
-             */
             $name = lcfirst(strtoupper($case->name));
             $method = Method::tryFromName(name: $name);
             Assert::assertThat($method, Assert::identicalTo($case));

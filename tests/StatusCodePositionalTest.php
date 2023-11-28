@@ -27,7 +27,7 @@ class StatusCodePositionalTest extends TestCase
     /**
      * @var StatusCode[]
      */
-    private array $cases;
+    private array $cases = [];
 
     public function setUp(): void
     {
@@ -37,9 +37,6 @@ class StatusCodePositionalTest extends TestCase
     public function testTryFromNames(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var string $case->name
-             */
             $name = $case->name;
             $statusCode = StatusCode::tryFromName($name);
             Assert::assertThat($statusCode, Assert::identicalTo($case));
@@ -49,9 +46,6 @@ class StatusCodePositionalTest extends TestCase
     public function testFromNames(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var string $case->name
-             */
             $name = $case->name;
             $statusCode = StatusCode::fromName($name);
             Assert::assertThat($statusCode, Assert::identicalTo($case));
@@ -61,9 +55,6 @@ class StatusCodePositionalTest extends TestCase
     public function testValues(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var int $case->value
-             */
             $value = $case->value;
             $name = "HTTP_{$value}";
             $statusCode = StatusCode::FromName($name);
@@ -74,9 +65,6 @@ class StatusCodePositionalTest extends TestCase
     public function testTryFromInteger(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var int $case->value
-             */
             $value = $case->value;
             $statusCode = StatusCode::tryFromInteger($value);
             Assert::assertThat($statusCode, Assert::identicalTo($case));
@@ -86,9 +74,6 @@ class StatusCodePositionalTest extends TestCase
     public function testFromInteger(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var int $case->value
-             */
             $value = $case->value;
             $statusCode = StatusCode::fromInteger($value);
             Assert::assertThat($statusCode, Assert::identicalTo($case));
@@ -98,9 +83,6 @@ class StatusCodePositionalTest extends TestCase
     public function testReasonPhraseConversion(): void
     {
         foreach ($this->cases as $case) {
-            /**
-             * @var string $case->name
-             */
             $name = $case->name;
             $reasonPhrase = ReasonPhrase::fromName($name);
             $statusCode = StatusCode::fromReasonPhrase($reasonPhrase);
