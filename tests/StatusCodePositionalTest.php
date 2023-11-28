@@ -27,7 +27,7 @@ class StatusCodePositionalTest extends TestCase
     /**
      * @var StatusCode[]
      */
-    private array $cases;
+    private array $cases = [];
 
     public function setUp(): void
     {

@@ -27,7 +27,7 @@ class ReasonPhraseNamedTest extends TestCase
     /**
      * @var ReasonPhrase[]
      */
-    private array $cases;
+    private array $cases = [];
 
     public function setUp(): void
     {

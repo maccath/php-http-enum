@@ -25,7 +25,7 @@ class MethodPositionalTest extends TestCase
     /**
      * @var Method[]
      */
-    private array $cases;
+    private array $cases = [];
 
     public function setUp(): void
     {
